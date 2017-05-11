@@ -1,10 +1,10 @@
-const Action = require('../../action/action');
+const Action = require('../../lib/action/action');
 
 class GetAxe extends Action {
   constructor() {
     super();
 
-    this.cost = 2;
+    this.cost = 1;
     this.in_range = false;
 
     this.add_precondition('axe exists', true);

@@ -1,4 +1,4 @@
-const GOAPAgent = require('../agent/goap');
+const GOAPAgent = require('../lib/agent/goap');
 
 class Lumberjack extends GOAPAgent {
   constructor(world, actions) {

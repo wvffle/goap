@@ -1,4 +1,4 @@
-const Action = require('../../action/action');
+const Action = require('../../lib/action/action');
 
 class Collect extends Action {
   constructor() {

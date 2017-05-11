@@ -2,3 +2,4 @@
 
 based on:
 - https://github.com/sploreg/goap
+- https://github.com/cpowell/cppgoap

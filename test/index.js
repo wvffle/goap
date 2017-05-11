@@ -1,4 +1,4 @@
-const World      = require('../world');
+const World      = require('../lib/world');
 const Lumberjack = require('./lumberjack');
 
 const Action = {
@@ -13,7 +13,7 @@ const world = new World;
 // States
 world.add_state('has wood', false);
 world.add_state('has axe', false);
-world.add_state('axe exists', false);
+world.add_state('axe exists', true);
 
 // Actions
 
