@@ -1,5 +1,5 @@
-const World = require('../world');
-const log   = require('util').inspect;
+const World  = require('../world');
+const Events = require('events');
 
 class PlanNode {
   /**
@@ -13,11 +13,13 @@ class PlanNode {
   }
 }
 
-class ActionPlanner {
+class ActionPlanner extends Events {
   /**
    * Construct an action planner
    */
   constructor() {
+    super();
+
     this.goals = {};
   }
 
@@ -45,12 +47,13 @@ class ActionPlanner {
         }
 
         while (curr !== null && curr.action != null) {
-          actions.push(curr.action.cost);
+          actions.unshift(curr.action);
           curr = curr.parent;
         }
       }
 
-      return actions.reverse();
+      this.emit('plan found', actions);
+      return actions;
     }
 
     throw new Error('world is not a World');

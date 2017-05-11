@@ -1,4 +1,4 @@
-const FSM = require('./fsm/fsm');
+const FSM = require('../fsm');
 const Events = require('events');
 
 class Agent extends Events {
@@ -11,4 +11,6 @@ class Agent extends Events {
     this.world = world;
     this.fsm = new FSM;
   }
-}
+};
+
+module.exports = Agent;

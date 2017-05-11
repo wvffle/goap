@@ -1,23 +1,28 @@
 const Agent = require('./agent');
+const ActionPlanner = require('../action/planner');
 
 class GOAPAgent extends Agent {
   /**
    * Constructs a goap agent
+   * @param {World}      world     world instance
+   * @param {Action[]}   actions   available actions
    */
-  constructor(world, action_planner) {
+  constructor(world, actions) {
     super(world);
 
     this.plan = [];
-    this.planner = action_planner;
+    this.planner = new ActionPlanner;
+    this.actions = actions;
 
-    fsm.push(this.idle);
+    this.fsm.push(this.idle);
   }
 
   /**
    * Default goap idle state
    */
   idle() {
-    const plan = this.planner.plan(this.world);
+    console.log(this)
+    const plan = this.planner.plan(this.world, this.actions);
     if (plan.length > 0) {
       this.plan = plan;
 
@@ -38,7 +43,10 @@ class GOAPAgent extends Agent {
     // Agent has to remain idle
     if (this.plan.length === 0) {
       console.warn('move_to: empty plan supplied');
-      this.fsm.pop();
+
+      this.fsm.pop(); // move
+      this.fsm.pop(); // perform_action
+
       return this.fsm.push(this.idle);
     }
 
@@ -46,7 +54,10 @@ class GOAPAgent extends Agent {
     const action = this.plan[0];
 
     // move the agent
-    this.fsm.pop();
+    this.move_agent(action)
+    if(action.is_in_range()) {
+      this.fsm.pop();
+    }
   }
 
   /**
@@ -66,18 +77,37 @@ class GOAPAgent extends Agent {
     // And remove it from plan queue
     const action = this.plan[0];
 
-    if (action.perform()) {
-      this.plan.unshift();
+    const in_range = action.is_in_range();
+    console.log('in_range', in_range)
+    if (in_range) {
+      if (action.perform()) {
+        this.plan.unshift();
+      } else {
+        this.fsm.pop(); // perform_action
+        this.fsm.push(this.idle);
+      }
     } else {
-      this.fsm.pop();
-      this.fsm.push(this.idle);
+      this.fsm.push(this.move_to);
     }
+
+  }
+
+  /**
+   * Update the state machine
+   */
+  update() {
+    this.fsm.update(this);
   }
 
   /**
    * Dummy move_agent function
+   * @param   {Action}   action   action instance
+   *
+   * @returns {boolean}           reached the targed?
    */
-  move_agent() {
+  move_agent(action) {
     console.warn('move_agent is not implemented in', this.constructor.name);
   }
-}
+};
+
+module.exports = GOAPAgent;

@@ -5,13 +5,13 @@ class Action extends Events {
   /**
    * Constructs an action
    */
-  constructor(cost = 0) {
+  constructor() {
     super();
 
     this.preconditions = {};
     this.effects = [];
 
-    this.cost = cost;
+    this.cost = 0;
   }
 
   /**
@@ -45,7 +45,7 @@ class Action extends Events {
   /**
    * Checks wether action can be performed or not
    */
-  is_available(world) {
+  is_in_range() {
     return false;
   }
 

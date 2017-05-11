@@ -1,11 +1,14 @@
-const FSMState = require('./state');
+const Events = require('events');
 
-class FSM {
+class FSM extends Events {
   /**
    * Constructs a fsm
    */
   constructor() {
+    super();
+
     this.stack = [];
+    this.last_state = null;
   }
 
   /**
@@ -27,8 +30,12 @@ class FSM {
   /**
    * Updates the state
    */
-  update() {
-    this.stack[this.stack.length - 1]();
+  update(that) {
+    const state = this.stack[this.stack.length - 1];
+    state.call(that);
+
+    this.emit('state transition', this.last_state || { name: null }, state);
+    this.last_state = state;
   }
 }
 
