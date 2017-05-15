@@ -1,13 +1,19 @@
 const Action = require('../../lib/action/action');
 
 class Collect extends Action {
-  constructor() {
+  constructor(world) {
     super();
 
     this.cost = 8;
     this.in_range = false;
 
-    this.add_effect('has wood', true);
+    this.add_precondition('has wood', function (value) {
+      return value <= world.data.min_wood;
+    });
+
+    this.add_effect('has wood', function (value) {
+      return value + 5;
+    });
   }
 
   is_in_range() {

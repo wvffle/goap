@@ -11,16 +11,20 @@ const Action = {
 const world = new World;
 
 // States
-world.add_state('has wood', false);
+world.add_state('has wood', 0);
 world.add_state('has axe', false);
 world.add_state('axe exists', true);
+
+world.data = {
+  min_wood: 7,
+};
 
 // Actions
 
 const actions = [
   new Action.get_axe,
-  new Action.collect,
-  new Action.chop_logs,
+  new Action.collect(world),
+  new Action.chop_logs(world),
 ];
 
 const npc = new Lumberjack(world, actions);

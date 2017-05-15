@@ -4,10 +4,13 @@ class Lumberjack extends GOAPAgent {
   constructor(world, actions) {
     super(world, actions);
 
+    world.data = world.data || {};
+    world.data.wood = 0;
+
     this.planner.add_goal('has wood', true);
 
     this.planner.on('plan found', plan => {
-      console.log('[planner]', plan);
+      console.log('[planner]', plan.map(a => a.constructor.name));
     });
 
     this.fsm.on('state transition', (from, to) => {
