@@ -6,9 +6,10 @@ module.exports = {
   GOAPAgent:     require('./lib/agent/goap'),
   Action:        require('./lib/action/action'),
   ActionPlanner: require('./lib/action/planner'),
+  version:       require('./package.json').version,
 }
 
-},{"./lib/action/action":2,"./lib/action/planner":3,"./lib/agent/agent":4,"./lib/agent/goap":5,"./lib/fsm":6,"./lib/world":7}],2:[function(require,module,exports){
+},{"./lib/action/action":2,"./lib/action/planner":3,"./lib/agent/agent":4,"./lib/agent/goap":5,"./lib/fsm":6,"./lib/world":7,"./package.json":8}],2:[function(require,module,exports){
 const Events = require('events');
 
 class Action extends Events {
@@ -90,7 +91,7 @@ class Action extends Events {
 
 module.exports = Action;
 
-},{"events":8}],3:[function(require,module,exports){
+},{"events":9}],3:[function(require,module,exports){
 const World  = require('../world');
 const Events = require('events');
 
@@ -331,7 +332,7 @@ class ActionPlanner extends Events {
 
 module.exports = ActionPlanner;
 
-},{"../world":7,"events":8}],4:[function(require,module,exports){
+},{"../world":7,"events":9}],4:[function(require,module,exports){
 const FSM = require('../fsm');
 const Events = require('events');
 
@@ -349,7 +350,7 @@ class Agent extends Events {
 
 module.exports = Agent;
 
-},{"../fsm":6,"events":8}],5:[function(require,module,exports){
+},{"../fsm":6,"events":9}],5:[function(require,module,exports){
 const Agent = require('./agent');
 const ActionPlanner = require('../action/planner');
 
@@ -509,7 +510,7 @@ class FSM extends Events {
 
 module.exports = FSM;
 
-},{"events":8}],7:[function(require,module,exports){
+},{"events":9}],7:[function(require,module,exports){
 class World {
   /**
    * Constructs a new world
@@ -537,6 +538,20 @@ class World {
 module.exports = World;
 
 },{}],8:[function(require,module,exports){
+module.exports={
+  "name": "goap",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "browserify": "browserify -s goap index.js > goap.js"
+  },
+  "author": "",
+  "license": "MIT"
+}
+
+},{}],9:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
