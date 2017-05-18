@@ -5,4 +5,5 @@ module.exports = {
   GOAPAgent:     require('./lib/agent/goap'),
   Action:        require('./lib/action/action'),
   ActionPlanner: require('./lib/action/planner'),
+  version:       require('./package.json').version,
 }
