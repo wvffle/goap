@@ -147,7 +147,7 @@ class ActionPlanner extends Events {
     if (world instanceof World) {
       const actions = [];
 
-      if (ActionPlanner.in_state(this.goals, world.state)) {
+      if (ActionPlanner.in_state(this.goals, world.state, true)) {
         this.emit('plan found', actions);
         return actions;
       }
@@ -251,7 +251,7 @@ class ActionPlanner extends Events {
     let found = false;
 
     for (let action of avail_actions) {
-      if (ActionPlanner.in_state(action.preconditions, parent.state)) {
+      if (ActionPlanner.in_state(action.preconditions, parent.state, true)) {
         const curr_state = ActionPlanner.populate_state(parent.state, action.effects);
         const node = new PlanNode(curr_state, parent.cost + action.cost, action, parent);
         if (ActionPlanner.in_state(goals, curr_state, true)) {
@@ -406,10 +406,10 @@ class GOAPAgent extends Agent {
     const action = this.plan[0];
 
     // move the agent
-    this.move_agent(action)
     if(action.is_in_range()) {
-      this.fsm.pop();
+      return this.fsm.pop();
     }
+    this.move_agent(action)
   }
 
   /**
