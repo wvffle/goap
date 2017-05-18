@@ -7,10 +7,17 @@ class ChopLogs extends Action {
     this.cost = 5;
     this.in_range = false;
 
+    /*
     this.add_precondition('has axe', true);
     this.add_precondition('has wood',  function (value) {
       return value <= world.data.min_wood;
     });
+
+    this.add_effect('has wood', function (value) {
+      return value + 3;
+    });
+    */
+    this.add_effect('has wood', 1)
 
     /**
      * desired: 6
@@ -35,9 +42,6 @@ class ChopLogs extends Action {
      * 5 + 3 + 3 + 3  14       23     27.02
      *
      */
-    this.add_effect('has wood', function (value) {
-      return value + 3;
-    });
   }
 
   is_in_range() {

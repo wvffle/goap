@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../goap.js"></script>
+    <script src="https://rawgit.com/wvffle/waff-query/master/dist/waff-query.js"></script>
+    <script>
+      const { q, qq, e } = waff;
+      const { World, Action, GOAPAgent } = goap;
+    </script>
+    <link href="./style.css" rel="stylesheet">
+  </head>
+  <body>
+    <!-- ui functions -->
+    <script src="./ui.js"></script>
+    <!-- buildings -->
+    <script src="./buildings/GameObject.js"></script>
+    <script src="./buildings/Forest.js"></script>
+    <script src="./buildings/Storage.js"></script>
+    <script src="./buildings/Forge.js"></script>
+    <!-- lumberjack actions -->
+    <script src="./actions/BasicAction.js"></script>
+    <script src="./actions/ChopLogs.js"></script>
+    <script src="./actions/StoreWood.js"></script>
+    <script src="./actions/GetAxe.js"></script>
+    <!-- blacksmith actions -->
+    <script src="./actions/ForgeAxe.js"></script>
+    <script src="./actions/StoreAxe.js"></script>
+    <!-- npcs -->
+    <script src="./npcs/NPC.js"></script>
+    <script src="./npcs/Lumberjack.js"></script>
+    <script src="./npcs/BlackSmith.js"></script>
+    <!-- init -->
+    <script src="./index.js"></script>
+  </body>
+</html>
