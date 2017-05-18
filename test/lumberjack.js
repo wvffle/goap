@@ -4,10 +4,9 @@ class Lumberjack extends GOAPAgent {
   constructor(world, actions) {
     super(world, actions);
 
-    world.data = world.data || {};
-    world.data.wood = 0;
-
-    this.planner.add_goal('has wood', true);
+    this.planner.add_goal('has wood', function (value) {
+      return value >= world.data.min_wood;
+    });
 
     this.planner.on('plan found', plan => {
       console.log('[planner]', plan.map(a => a.constructor.name));

@@ -8,7 +8,6 @@ class GetAxe extends Action {
     this.in_range = false;
 
     this.add_precondition('axe exists', true);
-    this.add_precondition('has axe',    false);
 
     this.add_effect('has axe', true);
   }

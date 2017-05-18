@@ -16,7 +16,7 @@ world.add_state('has axe', false);
 world.add_state('axe exists', true);
 
 world.data = {
-  min_wood: 7,
+  min_wood: 4,
 };
 
 // Actions
@@ -24,6 +24,7 @@ world.data = {
 const actions = [
   new Action.get_axe,
   new Action.collect(world),
+  new Action.chop_logs(world),
   new Action.chop_logs(world),
 ];
 

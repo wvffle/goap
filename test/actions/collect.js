@@ -4,7 +4,7 @@ class Collect extends Action {
   constructor(world) {
     super();
 
-    this.cost = 8;
+    this.cost = 19;
     this.in_range = false;
 
     this.add_precondition('has wood', function (value) {
