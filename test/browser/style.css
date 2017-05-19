@@ -91,6 +91,7 @@ a img {
 }
 body {
   background: #90ee90;
+  font-family: monospace;
 }
 .npc {
   width: 20px;
@@ -120,7 +121,6 @@ body {
 }
 .ui .data {
   display: flex;
-  font-family: monospace;
 }
 .ui .key,
 .ui .val {
@@ -129,4 +129,11 @@ body {
 .ui .val {
   margin: 0 0 0 auto;
   padding: 0 0 0 7px;
+}
+
+.info {
+  white-space: pre;
+  margin: 0 0 0 100%;
+  color: #fff;
+  text-shadow: 1px 1px 3px #000;
 }

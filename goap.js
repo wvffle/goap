@@ -430,6 +430,7 @@ class GOAPAgent extends Agent {
     const action = this.plan[0];
 
     if (action) {
+      this.emit('action', action)
       const in_range = action.is_in_range();
       console.log('in_range', in_range)
 
@@ -539,7 +540,7 @@ module.exports = World;
 },{}],8:[function(require,module,exports){
 module.exports={
   "name": "goap",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {

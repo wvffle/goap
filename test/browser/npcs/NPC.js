@@ -8,6 +8,8 @@ class NPC extends GOAPAgent {
     if (y === undefined) y = UI.random_pos().y;
 
     q().append(this.element = e(`.npc.${name}`));
+    this.element.append(e('.info'));
+
     this.element.css({
       left: x,
       top:  y,
@@ -15,6 +17,30 @@ class NPC extends GOAPAgent {
 
     this.in_move = false;
     this.name = name;
+
+    this.data = {};
+    const update = () => {
+      this.info  = [
+        `name:   ${name}`,
+        `action: ${this.data.action || null}`,
+        `fsm:    ${this.data.fsm || null}`,
+      ].join('<br>');
+    };
+
+    update();
+    this.fsm.on('state transition', (from, to) => {
+      if (from.name !== to.name || this.data.fsm === undefined) {
+        this.data.fsm = to.name;
+        update();
+      }
+    });
+
+    this.on('action', a => {
+      if (this.data.action !== a.constructor.name) {
+        this.data.action = a.constructor.name;
+        update();
+      }
+    })
   }
 
   get pos() {
@@ -22,6 +48,14 @@ class NPC extends GOAPAgent {
       x: this.element.getBoundingClientRect().x,
       y: this.element.getBoundingClientRect().y,
     };
+  }
+
+  get info() {
+    return this.element.children[0].innerHTML;
+  }
+
+  set info(val) {
+    return this.element.children[0].innerHTML = val;
   }
 
   move_agent(action) {
