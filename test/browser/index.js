@@ -6,16 +6,16 @@ world.state = UI.data;
 // starting state
 world.add_state('storage.wood', 0);
 world.add_state('lumberjack.wood', 0);
-// world.add_state('lumberjack.has_axe', false);
-// world.add_state('storage.has_axe', false);
 
 // spawn npcs
 const blacksmith = new BlackSmith(world, [
   ForgeAxe,
   StoreAxe,
+  GotoForge,
 ], 'blacksmith');
 
 blacksmith.planner.add_goal('storage.has_axe', true);
+blacksmith.planner.add_goal('blacksmith.in_forge', true);
 
 const lumberjack = new Lumberjack(world, [
   ChopLogs,

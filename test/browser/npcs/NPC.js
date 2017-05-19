@@ -71,7 +71,6 @@ class NPC extends GOAPAgent {
 
   animate_move(x, y) {
     const T = (Math.abs(this.pos.x - x) + Math.abs(this.pos.y - y)) / 432 * 1000 ^ 0;
-    console.log(T)
     this.element.css({
       transition: `top ${T}ms ease, left ${T}ms ease`,
       top:        (this.pos.y = y),

@@ -6,5 +6,6 @@ class StoreAxe extends BasicAction {
 
     this.add_effect('blacksmith.has_axe', false);
     this.add_effect('storage.has_axe', true);
+    this.add_effect('blacksmith.in_forge', false);
   }
 }

@@ -71,7 +71,13 @@ class Action extends Events {
   /**
    * Performs the action
    */
-  perform(world) {
+  perform(world, agent) {
+    agent.emit('perform', this);
+    if(this.cancel === true) {
+      this.cancel = false;
+      return false;
+    }
+
     for (let e in this.effects) {
       const effect = this.effects[e];
       if (effect.func !== undefined) {
@@ -81,8 +87,6 @@ class Action extends Events {
 
       world.state[e] = effect.value;
     }
-
-    this.emit('perform');
 
     return true;
   }
@@ -394,10 +398,10 @@ class GOAPAgent extends Agent {
     // If the plan is empty
     // Agent has to remain idle
     if (this.plan.length === 0) {
-      console.warn('move_to: empty plan supplied');
 
       this.fsm.pop(); // move
       this.fsm.pop(); // perform_action
+      this.emit('done');
 
       return this.fsm.push(this.idle);
     }
@@ -419,8 +423,8 @@ class GOAPAgent extends Agent {
 
     // Idle if we don't have the plan
     if (this.plan.length === 0) {
-      console.warn('perform_action: empty plan supplied');
       this.fsm.pop();
+      this.emit('done');
       this.fsm.push(this.idle);
       return;
     }
@@ -428,19 +432,19 @@ class GOAPAgent extends Agent {
     // Get current action
     // And remove it from plan queue
     const action = this.plan[0];
+    this.emit('action', action);
 
     if (action) {
-      this.emit('action', action)
       const in_range = action.is_in_range();
-      console.log('in_range', in_range)
 
       if (in_range) {
-        if (action.perform(this.world)) this.plan.shift();
+        if (action.perform(this.world, this)) this.plan.shift();
       } else {
         this.fsm.push(this.move_to);
       }
     } else {
       this.fsm.pop(); // perform_action
+      this.emit('done');
       this.fsm.push(this.idle);
     }
 
