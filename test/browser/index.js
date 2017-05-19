@@ -19,11 +19,12 @@ blacksmith.planner.add_goal('blacksmith.in_forge', true);
 
 const lumberjack = new Lumberjack(world, [
   ChopLogs,
+  CollectBranches,
   StoreWood,
   GetAxe,
 ], 'lumberjack');
 
-lumberjack.planner.add_goal('storage.wood', v => v >= 10);
+lumberjack.planner.add_goal('storage.wood', v => v > world.state['storage.wood'] && v < 100);
 
 
 
