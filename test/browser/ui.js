@@ -16,10 +16,10 @@ const UI = new (class UI {
     }, this.tps(30));
   }
 
-  random_pos(x = 0, y = 0, w = q('').clientWidth - 20, h = q('').clientHeight - 20) {
+  random_pos(x = 0, y = 0, w = q('').clientWidth, h = q('').clientHeight, offset = 0) {
     return {
-      x: this.random(x, x + w),
-      y: this.random(y, y + h),
+      x: this.random(x, x + w - offset),
+      y: this.random(y, y + h - offset),
     }
   }
 

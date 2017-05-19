@@ -4,8 +4,8 @@ class NPC extends GOAPAgent {
     super(world, actions);
     actions.forEach(a => a.agent = this);
 
-    if (x === undefined) x = UI.random_pos().x;
-    if (y === undefined) y = UI.random_pos().y;
+    if (x === undefined) x = UI.random_pos(undefined, undefined, undefined, undefined, 20).x;
+    if (y === undefined) y = UI.random_pos(undefined, undefined, undefined, undefined, 20).y;
 
     q().append(this.element = e(`.npc.${name}`));
     this.element.append(e('.info'));

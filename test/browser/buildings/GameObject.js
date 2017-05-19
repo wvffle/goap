@@ -5,6 +5,11 @@ class GameObject {
 
     this.info = `object: ${clazz}`;
 
+    if (x === undefined) x = UI.random_pos(undefined, undefined, undefined, undefined, 130 + 300).x;
+    if (y === undefined) y = UI.random_pos(undefined, undefined, undefined, undefined, 60).y;
+
+    console.log(clazz, x, y)
+
     this.element.css({
       left: x,
       top:  y,

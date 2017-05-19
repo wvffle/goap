@@ -92,6 +92,7 @@ a img {
 body {
   background: #90ee90;
   font-family: monospace;
+  overflow: hidden;
 }
 .npc {
   width: 20px;
