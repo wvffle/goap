@@ -50,10 +50,6 @@ class NPC extends GOAPAgent {
     };
   }
 
-  get info() {
-    return this.element.children[0].innerHTML;
-  }
-
   set info(val) {
     return this.element.children[0].innerHTML = val;
   }

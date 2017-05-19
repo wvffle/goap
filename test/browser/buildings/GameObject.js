@@ -1,10 +1,18 @@
 class GameObject {
   constructor(clazz, x, y) {
     q().append(this.element = e(`.object.${clazz}`));
+    this.element.append(e('.info'));
+
+    this.info = `object: ${clazz}`;
+
     this.element.css({
       left: x,
       top:  y,
     })
+  }
+
+  set info(val) {
+    this.element.children[0].innerHTML = val;
   }
 
   get pos() {
