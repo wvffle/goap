@@ -25,13 +25,12 @@ class GameObject {
     const npc_size = 20;
     const { x, y } = this.pos;
     const { w, h } = this.dim;
-    return {
-      x: GameObject.random(x, x+w-npc_size),
-      y: GameObject.random(y, y+h-npc_size),
-    };
+    return UI.random_pos(x, y, w - npc_size, h - npc_size);
   }
 
-  static random(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+  in_range(point) {
+    const { x, y } = this.pos;
+    const { w, h } = this.dim;
+    return point.x >= x && point.x <= x + w && point.y >= y && point.y <= y + h;
   }
 };

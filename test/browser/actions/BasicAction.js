@@ -1,19 +1,17 @@
 class BasicAction extends Action {
 
-  constructor() {
+  constructor(object) {
     super();
 
-    this.in_range = false;
+    this.object = object;
+    // have to set this.agent by hand in NPC class
   }
 
   get pos() {
-    return {
-      x: 0,
-      y: 0,
-    };
+    return this.object.random_pos;
   }
 
   is_in_range() {
-    return this.in_range;
+    return this.object.in_range(this.agent.pos);
   }
 }

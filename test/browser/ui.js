@@ -13,10 +13,21 @@ const UI = new (class UI {
         el.children[1].innerHTML = JSON.stringify(this.data[d]);
         this.element.append(el);
       }
-    }, this.fps(30));
+    }, this.tps(30));
   }
 
-  fps(target) {
+  random_pos(x = 0, y = 0, w = q('').clientWidth - 20, h = q('').clientHeight - 20) {
+    return {
+      x: this.random(x, x + w),
+      y: this.random(y, y + h),
+    }
+  }
+
+  random(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+  }
+
+  tps(target) {
     return 1000 / target;
   }
 });

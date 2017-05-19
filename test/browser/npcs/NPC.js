@@ -1,6 +1,11 @@
 class NPC extends GOAPAgent {
-  constructor(world, actions, name, x = 0, y = 0) {
+  constructor(world, actions, name, x, y) {
+    actions = actions.map(a => new a);
     super(world, actions);
+    actions.forEach(a => a.agent = this);
+
+    if (x === undefined) x = UI.random_pos().x;
+    if (y === undefined) y = UI.random_pos().y;
 
     q().append(this.element = e(`.npc.${name}`));
     this.element.css({
@@ -26,7 +31,6 @@ class NPC extends GOAPAgent {
       const time = this.animate_move(action.pos.x, action.pos.y);
       setTimeout(() => {
         this.in_move = false;
-        action.in_range = true;
       }, time + 100);
     }
   }

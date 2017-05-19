@@ -11,16 +11,16 @@ world.add_state('lumberjack.wood', 0);
 
 // spawn npcs
 const blacksmith = new BlackSmith(world, [
-  new ForgeAxe,
-  new StoreAxe,
+  ForgeAxe,
+  StoreAxe,
 ], 'blacksmith');
 
 blacksmith.planner.add_goal('storage.has_axe', true);
 
 const lumberjack = new Lumberjack(world, [
-  new ChopLogs,
-  new StoreWood,
-  new GetAxe,
+  ChopLogs,
+  StoreWood,
+  GetAxe,
 ], 'lumberjack');
 
 lumberjack.planner.add_goal('storage.wood', v => v >= 10);
@@ -33,4 +33,4 @@ lumberjack.planner.add_goal('storage.wood', v => v >= 10);
 setInterval(function () {
   lumberjack.update();
   blacksmith.update();
-}, UI.fps(3));
+}, UI.tps(3));
