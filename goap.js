@@ -21,7 +21,7 @@ class Action extends Events {
     super();
 
     this.preconditions = {};
-    this.effects = [];
+    this.effects = {};
 
     this.cost = 0;
   }
@@ -73,6 +73,7 @@ class Action extends Events {
    */
   perform(world, agent) {
     agent.emit('perform', this);
+    this.emit('perform');
     if(this.cancel === true) {
       this.cancel = false;
       return false;
@@ -81,7 +82,7 @@ class Action extends Events {
     for (let e in this.effects) {
       const effect = this.effects[e];
       if (effect.func !== undefined) {
-        world.state[e] = effect.func(world.state[e]);
+        world.state[e] = effect.func(world.state[e], world.state);
         continue;
       }
 
@@ -151,7 +152,7 @@ class ActionPlanner extends Events {
     if (world instanceof World) {
       const actions = [];
 
-      if (ActionPlanner.in_state(this.goals, world.state, true)) {
+      if (ActionPlanner.in_state(this.goals, world.state)) {
         this.emit('plan found', actions);
         return actions;
       }
@@ -255,10 +256,10 @@ class ActionPlanner extends Events {
     let found = false;
 
     for (let action of avail_actions) {
-      if (ActionPlanner.in_state(action.preconditions, parent.state, true)) {
+      if (ActionPlanner.in_state(action.preconditions, parent.state)) {
         const curr_state = ActionPlanner.populate_state(parent.state, action.effects);
         const node = new PlanNode(curr_state, parent.cost + action.cost, action, parent);
-        if (ActionPlanner.in_state(goals, curr_state, true)) {
+        if (ActionPlanner.in_state(goals, curr_state)) {
           leaves.push(node);
           found = true;
         } else {
@@ -271,14 +272,13 @@ class ActionPlanner extends Events {
     return found;
   }
 
-  static in_state(source, state, strict = false) {
+  static in_state(source, state) {
     for (let s in source) {
-      if (strict === false && state[s] === undefined) continue;
       const ref = source[s];
 
       // Dynamic preconditions
       if (typeof ref === 'object' && ref.func !== undefined) {
-        if (ref.func(state[s] || null) == 1 - 1) {
+        if (ref.func(state[s] || null, state) == 1 - 1) {
           return false;
         }
 
@@ -288,7 +288,7 @@ class ActionPlanner extends Events {
       // Dynamic goals
       const refvalue = typeof ref === 'object' ? ref.value : ref;
       if (typeof refvalue === 'function') {
-        if (refvalue(state[s]) === false) return false;
+        if (refvalue(state[s], state) === false) return false;
 
         continue;
       }
@@ -313,7 +313,7 @@ class ActionPlanner extends Events {
 
       // Dynamic effects
       if (typeof ref === 'object' && ref.func !== undefined) {
-        res[c] = ref.func(res[c] || null);
+        res[c] = ref.func(res[c] || null, res);
         continue;
       }
 
