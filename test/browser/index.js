@@ -11,6 +11,7 @@ world.add_state('storage.rocks', 0);
 world.add_state('miner.rocks', 0);
 
 world.add_state('blacksmith.rocks', 0);
+world.add_state('blacksmith.wood', 0);
 
 // spawn npcs
 const blacksmith = new BlackSmith(world, [
@@ -18,6 +19,7 @@ const blacksmith = new BlackSmith(world, [
   StoreAxe,
   GotoForge,
   GetRocks,
+  GetWood,
 ], 'blacksmith');
 
 blacksmith.planner.add_goal('storage.has_axe', true);
