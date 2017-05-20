@@ -3,6 +3,8 @@ class BasicAction extends Action {
   constructor(object) {
     super();
 
+    this.cost = 1;
+
     this.object = object;
     // have to set this.agent by hand in NPC class
   }

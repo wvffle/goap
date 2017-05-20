@@ -90,27 +90,57 @@ a img {
   border: none;
 }
 body {
-  background: #90ee90;
+  background: url(assets/grass.png);
   font-family: monospace;
   overflow: hidden;
 }
 .npc {
   width: 20px;
   height: 20px;
-  background: #fff;
   position: absolute;
+  background-position: 0 0;
+  height: 46px;
+  width: 32px;
 }
 .lumberjack {
-  background: #1f1;
+  background-image: url(assets/lumberjack.png);
 }
 .blacksmith {
-  background: #666;
+  background-image: url(assets/blacksmith.png);
+}
+.miner {
+  background-image: url(assets/miner.png);
 }
 .object {
   width: 130px;
   height: 60px;
   background: #000;
   position: absolute;
+}
+.object.forest {
+  background: url(assets/forest.png);
+  width: 200px;
+  height: 135px;
+}
+.object.storage {
+  background: url(assets/chest.png);
+  width: 32px;
+  height: 32px;
+}
+.object.lumberjackshouse {
+  background: url(assets/house3x2.gif);
+  width: 126px;
+  height: 104px;
+}
+.object.mine {
+  background: url(assets/mine.png);
+  width: 128px;
+  height: 104px;
+}
+.object.forge {
+  background: url(assets/house1x2.gif);
+  width: 126px;
+  height: 106px;
 }
 .ui {
   position: absolute;
