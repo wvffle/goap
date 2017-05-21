@@ -549,7 +549,7 @@ module.exports={
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "browserify": "browserify -s goap index.js > goap.js"
+    "browserify": "browserify -s goap index.js > browser.js"
   },
   "author": "",
   "license": "MIT"
