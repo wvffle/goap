@@ -1,6 +1,6 @@
 class GetAxe extends BasicAction {
-  constructor() {
-    super(storage);
+  constructor(agent) {
+    super(agent, storage);
 
     this.add_precondition('storage.has_axe', true);
     this.add_effect('storage.has_axe', false);

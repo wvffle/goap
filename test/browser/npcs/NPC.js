@@ -1,8 +1,6 @@
 class NPC extends GOAPAgent {
-  constructor(world, actions, name, x, y) {
-    actions = actions.map(a => new a);
-    super(world, actions);
-    actions.forEach(a => a.agent = this);
+  constructor(world, name, x, y) {
+    super(world);
 
     if (x === undefined) x = UI.random_pos(undefined, undefined, undefined, undefined, 20).x;
     if (y === undefined) y = UI.random_pos(undefined, undefined, undefined, undefined, 20).y;

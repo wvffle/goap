@@ -1,6 +1,6 @@
 class CollectRocks extends BasicAction {
-  constructor() {
-    super(mine);
+  constructor(agent) {
+    super(agent, mine);
 
     this.cost = 9;
 

@@ -1,6 +1,6 @@
 class StoreRocks extends BasicAction {
-  constructor() {
-    super(storage);
+  constructor(agent) {
+    super(agent, storage);
 
     this.add_precondition('miner.rocks', v => v > 0);
 

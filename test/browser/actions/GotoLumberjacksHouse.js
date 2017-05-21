@@ -1,6 +1,6 @@
 class GotoLumberjacksHouse extends BasicAction {
-  constructor() {
-    super(lumberjackshouse);
+  constructor(agent) {
+    super(agent, lumberjackshouse);
 
     this.add_effect('lumberjack.in_house', true);
   }

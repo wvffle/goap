@@ -1,7 +1,7 @@
 class BasicAction extends Action {
 
-  constructor(object) {
-    super();
+  constructor(agent, object) {
+    super(agent);
 
     this.cost = 1;
 

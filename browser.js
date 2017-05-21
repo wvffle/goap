@@ -17,13 +17,15 @@ class Action extends Events {
   /**
    * Constructs an action
    */
-  constructor() {
+  constructor(agent) {
     super();
+
+    this.agent = agent;
+    this.agent.actions.push(this);
 
     this.preconditions = {};
     this.effects = {};
-
-    this.cost = 0;
+    this.cost = 1;
   }
 
   /**
@@ -364,12 +366,12 @@ class GOAPAgent extends Agent {
    * @param {World}      world     world instance
    * @param {Action[]}   actions   available actions
    */
-  constructor(world, actions) {
+  constructor(world) {
     super(world);
 
     this.plan = [];
+    this.actions = [];
     this.planner = new ActionPlanner;
-    this.actions = actions;
 
     this.fsm.push(this.idle);
   }
@@ -544,7 +546,7 @@ module.exports = World;
 },{}],8:[function(require,module,exports){
 module.exports={
   "name": "goap",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {

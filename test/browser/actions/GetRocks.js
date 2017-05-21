@@ -1,6 +1,6 @@
 class GetRocks extends BasicAction {
-  constructor() {
-    super(storage);
+  constructor(agent) {
+    super(agent, storage);
 
     this.add_precondition('storage.rocks', v => v >= 7);
 

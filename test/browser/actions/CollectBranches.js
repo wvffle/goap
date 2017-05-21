@@ -1,6 +1,6 @@
 class CollectBranches extends BasicAction {
-  constructor() {
-    super(forest);
+  constructor(agent) {
+    super(agent, forest);
 
     this.cost = 9;
 

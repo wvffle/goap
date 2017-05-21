@@ -1,6 +1,6 @@
 class ForgeAxe extends BasicAction {
-  constructor() {
-    super(forge);
+  constructor(agent) {
+    super(agent, forge);
 
     this.add_precondition('blacksmith.rocks', v => v >= 7);
     this.add_precondition('blacksmith.wood', v => v >= 3);

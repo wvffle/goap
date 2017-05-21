@@ -1,6 +1,6 @@
 class StoreWood extends BasicAction {
-  constructor() {
-    super(storage);
+  constructor(agent) {
+    super(agent, storage);
 
     this.add_precondition('lumberjack.wood', v => v > 0);
 
