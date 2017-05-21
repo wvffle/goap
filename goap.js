@@ -544,7 +544,7 @@ module.exports = World;
 },{}],8:[function(require,module,exports){
 module.exports={
   "name": "goap",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
