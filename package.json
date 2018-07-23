@@ -1,12 +1,20 @@
 {
   "name": "goap",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jasmine",
     "browserify": "browserify -s goap index.js > browser.js"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "fastpriorityqueue": "^0.5.0",
+    "lodash.clonedeep": "^4.5.0",
+    "lodash.isequal": "^4.5.0"
+  },
+  "devDependencies": {
+    "jasmine": "^3.1.0"
+  }
 }
